@@ -1,0 +1,86 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: component
+  namespace: crossplane
+spec:
+  compositeTypeRef:
+    apiVersion: platform.io/v1alpha1
+    kind: XPlatformApplication
+  patchSets:
+  - name: metadata
+    patches:
+    - fromFieldPath: metadata.labels
+  resources:
+  - name: argocd-app
+    base:
+      apiVersion: kubernetes.crossplane.io/v1alpha1
+      kind: Object
+      spec:
+        forProvider:
+          manifest:
+            apiVersion: argoproj.io/v1alpha1
+            kind: Application
+            metadata:
+              name: placeholder
+              namespace: argocd
+              finalizers:
+                - resources-finalizer.argocd.argoproj.io
+            spec:
+              project: platform-apps
+              source:
+                repoURL: https://github.com/francisco-com-au/platform-ops
+                targetRevision: HEAD
+                path: crossplane/helm/component
+                helm:
+                  values: placeholder
+              destination:
+                server: https://kubernetes.default.svc
+                namespace: platform-apps
+              syncPolicy:
+                automated:
+                  selfHeal: true
+                  prune: true
+                syncOptions:
+                - CreateNamespace=true
+
+    patches:
+    # - type: PatchSet
+    #   patchSetName: metadata
+    - type: FromCompositeFieldPath
+      # fromFieldPath: metadata.labels[crossplane.io/claim-name]
+      fromFieldPath: metadata.name
+      toFieldPath: spec.forProvider.manifest.metadata.name
+    - type: FromCompositeFieldPath
+      # fromFieldPath: metadata.labels[crossplane.io/claim-name]
+      fromFieldPath: spec.name
+      toFieldPath: spec.forProvider.manifest.spec.source.helm.values
+      transforms:
+      - type: string
+        string:
+          fmt: "%s"
+      policy:
+        fromFieldPath: Required
+
+  # - name: project
+  # - name: repo
+  # - name: namespace
+  #   base:
+  #     apiVersion: kubernetes.crossplane.io/v1alpha1
+  #     kind: Object
+  #     spec:
+  #       forProvider:
+  #         manifest:
+  #           apiVersion: v1
+  #           kind: Namespace
+  #           metadata:
+  #             name: placeholder
+  #   patches:
+  #   - type: PatchSet
+  #     patchSetName: metadata
+  #   - type: FromCompositeFieldPath
+  #     # fromFieldPath: metadata.labels[crossplane.io/claim-name]
+  #     fromFieldPath: spec.name
+  #     toFieldPath: spec.forProvider.manifest.metadata.name
+  #     policy:
+  #       fromFieldPath: Required
