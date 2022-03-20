@@ -1,0 +1,98 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xcomponents.platform.io
+  namespace: crossplane
+spec:
+  claimNames:
+    kind: Component
+    plural: components
+    shortNames:
+    - co
+  defaultCompositionRef:
+    name: component
+  group: platform.io
+  names:
+    kind: XComponent
+    plural: xcomponents
+    shortNames:
+    - xco
+  versions:
+  - name: v1alpha1
+    referenceable: true
+    served: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        required:
+        - spec
+        properties:
+          spec:
+            type: object
+            required:
+            - name
+            - owner
+            properties:
+              name:
+                type: string
+              owner:
+                type: string
+              dns:
+                type: string
+              containers:
+                type: array
+                default: []
+                items:
+                  type: object
+                  required:
+                  - name
+                  - source
+                  properties:
+                    name:
+                      type: string
+                    source:
+                      type: object
+                      properties:
+                        image:
+                          type: string
+                        repoPath:
+                          type: string
+                    replicas:
+                      type: integer
+                      default: 3
+                    expose:
+                      type: array
+                      items:
+                        type: object
+                        required:
+                        - name
+                        - port
+                        properties:
+                          name:
+                            type: string
+                          port:
+                            type: integer
+                          protocol:
+                            type: string
+                            default: TCP
+                          ingressPath:
+                            type: string
+              infra:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    name:
+                      type: string
+
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    name:
+                      type: string

@@ -1,0 +1,19 @@
+{{- range $container := .Values.spec.containers }}
+{{- if $container.expose }}
+{{- range $port := $container.expose }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $container.name }}-{{ $port.name }}
+  namespace: {{ $.Values.spec.owner }}
+spec:
+  selector:
+    app: {{ $container.name }}
+  ports:
+    - protocol: {{ $port.protocol }}
+      port: {{ $port.port }}
+      targetPort: {{ $port.port }}
+---
+{{- end }}
+{{- end }}
+{{- end }}

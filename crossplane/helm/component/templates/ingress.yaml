@@ -1,0 +1,52 @@
+{{- if .Values.spec.dns }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argo
+  namespace: {{ $.Values.spec.owner }}
+spec:
+  dnsNames:
+    - {{ .Values.spec.dns }}
+  secretName: {{ .Values.spec.name }}-tls
+  issuerRef:
+    name: letsencrypt-cluster-issuer
+    kind: ClusterIssuer
+{{- end }}
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ .Values.spec.name }}
+  namespace: {{ $.Values.spec.owner }}
+  annotations:
+    # traefik.ingress.kubernetes.io/router.entrypoints: web
+    # traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
+spec:
+  ingressClassName: nginx
+  {{- if .Values.spec.dns }}
+  tls:
+  - hosts:
+    - {{ .Values.spec.dns }}
+    secretName: {{ .Values.spec.name }}-tls
+  {{- end }}
+  rules:
+  - http:
+      paths:
+        {{- range $container := .Values.spec.containers }}
+        {{- if $container.expose }}
+        {{- range $port := $container.expose }}
+        {{- if $port.ingressPath }}
+        - path: {{ $port.ingressPath }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $container.name }}-{{ $port.name }}
+              port:
+                number: {{ $port.port }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+        {{- end }}
+    {{- if .Values.spec.dns }}
+    host: {{ .Values.spec.dns }}
+    {{- end }}

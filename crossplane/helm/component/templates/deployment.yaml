@@ -1,0 +1,36 @@
+{{- range $container := .Values.spec.containers }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $container.name }}
+  namespace: {{ $.Values.spec.owner }}
+  labels:
+    app: {{ $container.name }}
+spec:
+  replicas: {{ $container.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $container.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ $container.name }}
+    spec:
+      containers:
+      - name: {{ $container.name }}
+        {{- if $container.source.image }}
+        image: {{ $container.source.image }}
+        {{- else }}
+        {{- if $container.source.repoPath }}
+        image: gcr.io//{{ $.Values.spec.owner }}/{{ $container.name }}:latest
+        {{- end }}
+        {{- end}}
+        {{- if $container.expose }}
+        ports:
+          {{- range $port := $container.expose }}
+          - containerPort: {{ $port.port }}
+            name: {{ $port.name }}
+          {{- end }}
+        {{- end }}
+---
+{{- end }}

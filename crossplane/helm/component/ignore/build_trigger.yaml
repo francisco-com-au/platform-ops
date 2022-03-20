@@ -1,0 +1,37 @@
+# {{- range $container := .Values.spec.containers }}
+# # {{ $container.name }} DEV
+# apiVersion: cloudbuild.gcp.jet.crossplane.io/v1alpha1
+# kind: Trigger
+# metadata:
+#   name: {{ .Values.spec.owner }}-{{ $container.name }}-dev
+# spec:
+#   forProvider:
+#     name: {{ .Values.spec.owner }}-{{ $container.name }}-dev
+#     github:
+#       name:
+#       owner:
+#       push:
+#         branch: "^develop$"
+#     substitutions:
+#       _ENV: dev
+# ---
+# {{- end }}
+
+
+
+# resource "google_cloudbuild_trigger" "address-api-dev-ci" {
+#     project = module.cicd-project-prod.project_id
+#     name = "address-api-dev-ci"
+#     github {
+#         name   = "api"
+#         owner  = "address-australia"
+#         push {
+#             branch = "^develop$"
+#         }
+#     }
+#     substitutions = {
+#         _APP_PROJECT_ID = module.address-project-dev.project_id
+#         _ENV = "dev"
+#     }
+#     filename = "cloudbuild.yaml"
+# }

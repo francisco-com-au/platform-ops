@@ -1,0 +1,39 @@
+# spec:
+#   name: website
+#   owner: address-australia # <- name of the Application
+#   dns: addressaustralia.com.au # <- if present creates SSL
+#   repo:
+#     create: false
+#     name: https://github.com/address-australia/website
+#   containers: # <- each container maps to a deployment or statefulset
+#     - name: static
+#       source:
+#         repoPath: static
+#       replicas: 3
+#       expose:
+#         - name: http
+#           port: 80
+#           ingressPath: / # <- if present creates an ingress path
+#     - name: api
+#       source:
+#         repoPath: api
+#       replicas: 3
+#       expose:
+#         - name: http
+#           port: 8080
+#           ingressPath: /api
+#     - name: sessions
+#       source:
+#         image: gcr.io/address-australia/website/mongo:1.0.0
+#       replicas: 3
+#       expose:
+#         - name: mongo
+#           port: 27017
+#   infra:
+#     - type: infra.data.firestore
+#       name: plans
+#     - type: infra.pubsub.topic
+#       name: stripe-topic
+
+#   data:
+#     - name: firestore
