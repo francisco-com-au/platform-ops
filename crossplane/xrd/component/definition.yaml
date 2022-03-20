@@ -39,6 +39,16 @@ spec:
                 type: string
               dns:
                 type: string
+              repo:
+                type: object
+                required:
+                - url
+                properties:
+                  create:
+                    type: boolean
+                    default: false
+                  url:
+                    type: string
               containers:
                 type: array
                 default: []

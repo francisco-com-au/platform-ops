@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform-apps
+  source:
+    repoURL: https://github.com/francisco-com-au/platform-ops
+    targetRevision: HEAD
+    path: crossplane/helm/component
+    helm:
+      values: |
+        spec:
+          name: nginx
+          owner: test # <- name of the Application
+          containers: # <- each container maps to a deployment or statefulset
+            - name: nginx
+              source:
+                image: nginx
+              replicas: 3
+              expose:
+                - name: http
+                  port: 80
+                  ingressPath: / # <- if present creates an ingress path
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform-apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true

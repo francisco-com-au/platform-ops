@@ -4,7 +4,7 @@
 #   dns: addressaustralia.com.au # <- if present creates SSL
 #   repo:
 #     create: false
-#     name: https://github.com/address-australia/website
+#     url: https://github.com/address-australia/website
 #   containers: # <- each container maps to a deployment or statefulset
 #     - name: static
 #       source:

@@ -22,7 +22,7 @@ spec:
         image: {{ $container.source.image }}
         {{- else }}
         {{- if $container.source.repoPath }}
-        image: gcr.io//{{ $.Values.spec.owner }}/{{ $container.name }}:latest
+        image: gcr.io/YOUR_BUILD_PROJECT/{{ $.Values.spec.owner }}/{{ $.Values.spec.name }}/{{ $container.name }}:latest
         {{- end }}
         {{- end}}
         {{- if $container.expose }}
