@@ -19,6 +19,6 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-      prune: true
+      prune: false # <- can't enable prunning due to an issue with labels propagations: https://github.com/crossplane/crossplane/issues/2121
     syncOptions:
     - CreateNamespace=true
