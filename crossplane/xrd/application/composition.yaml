@@ -1,12 +1,12 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: application
+  name: platformapplication
   namespace: crossplane
 spec:
   compositeTypeRef:
     apiVersion: platform.io/v1alpha1
-    kind: XApplication
+    kind: XPlatformApplication
   patchSets:
   - name: metadata
     patches:

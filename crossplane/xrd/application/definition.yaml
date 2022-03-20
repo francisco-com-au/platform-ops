@@ -1,20 +1,20 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xapplications.platform.io
+  name: xplatformapplications.platform.io
   namespace: crossplane
 spec:
   claimNames:
-    kind: Application
-    plural: applications
+    kind: PlatformApplication
+    plural: platformapplications
     shortNames:
     - ap
   defaultCompositionRef:
-    name: application
+    name: platformapplication
   group: platform.io
   names:
-    kind: XApplication
-    plural: xapplications
+    kind: XPlatformApplication
+    plural: xplatformapplications
     shortNames:
     - xap
   versions:
