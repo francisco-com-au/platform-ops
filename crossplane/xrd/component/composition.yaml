@@ -6,7 +6,7 @@ metadata:
 spec:
   compositeTypeRef:
     apiVersion: platform.io/v1alpha1
-    kind: XPlatformApplication
+    kind: XComponent
   patchSets:
   - name: metadata
     patches:
