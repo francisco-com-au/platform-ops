@@ -53,7 +53,7 @@ spec:
       toFieldPath: spec.forProvider.manifest.metadata.name
     - type: FromCompositeFieldPath
       # fromFieldPath: metadata.labels[crossplane.io/claim-name]
-      fromFieldPath: spec.name
+      fromFieldPath: spec
       toFieldPath: spec.forProvider.manifest.spec.source.helm.values
       transforms:
       - type: string
