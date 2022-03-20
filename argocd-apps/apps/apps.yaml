@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: platform-apps
+  name: apps
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: platform-apps
+  project: apps
   source:
     repoURL: https://github.com/francisco-com-au/platform-apps
     targetRevision: HEAD
@@ -15,7 +15,7 @@ spec:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: platform-apps
+    namespace: apps
   syncPolicy:
     automated:
       selfHeal: true
