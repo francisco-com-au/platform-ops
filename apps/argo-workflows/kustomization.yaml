@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - ./namespace.yaml
 # - ./service.yaml
+- ./ingress.yaml
 - https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
 
 patchesStrategicMerge:
