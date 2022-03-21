@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argo-server
+spec:
+  template:
+    spec:
+      containers:
+      - name: argo-server
+        env:
+          - name: ARGO_SECURE
+            value: "true"
+          - name: ARGO_INSECURE_SKIP_VERIFY
+            value: "true"
+        ports:
+          - containerPort: 2746
+            protocol: TCP
+        args:
+          - server
+          - '--namespaced'
+          - '--auth-mode'
+          - client

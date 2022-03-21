@@ -1,0 +1,42 @@
+---
+# argo external
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-argo
+  namespace: argo
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
+spec:
+  rules:
+  - host: argo.francisco.com.au
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argo-server
+            port:
+              number: 2746
+---
+# argo internal
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-local-argo
+  namespace: argo
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
+spec:
+  rules:
+    - host: argo.this
+      http:
+        paths:
+          - backend:
+              service:
+                name: argo-server
+                port:
+                  number: 2746
+            path: /
+            pathType: Prefix
