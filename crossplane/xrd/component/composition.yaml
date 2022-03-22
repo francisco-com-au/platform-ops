@@ -49,16 +49,16 @@ spec:
     #   patchSetName: metadata
     - type: FromCompositeFieldPath
       # fromFieldPath: metadata.labels[crossplane.io/claim-name]
-      fromFieldPath: metadata.name
+      fromFieldPath: metdata.name
       toFieldPath: spec.forProvider.manifest.metadata.name
     - type: FromCompositeFieldPath
       # fromFieldPath: metadata.labels[crossplane.io/claim-name]
       fromFieldPath: spec
       toFieldPath: spec.forProvider.manifest.spec.source.helm.values
-      transforms:
-      - type: string
-        string:
-          fmt: "%+v\n"
+      # transforms:
+      # - type: string
+      #   string:
+      #     fmt: "%+v\n"
       policy:
         fromFieldPath: Required
 
