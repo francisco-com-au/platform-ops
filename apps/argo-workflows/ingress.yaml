@@ -29,11 +29,12 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-local-argo
+  name: argo-local
   namespace: argo
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: https # ingress-nginx
 spec:
+  ingressClassName: nginx
   rules:
     - host: argo.this
       http:
