@@ -3,10 +3,14 @@
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: ingress-argocd
+  name: argocd
   namespace: argocd
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - argocd.francisco.com.au
+    secretName: argocd-tls
   rules:
   - host: argocd.francisco.com.au
     http:
@@ -20,11 +24,11 @@ spec:
               number: 443
 
 ---
-# argocd external
+# argocd internal. Point /etc/hosts to this ingress
 kind: Ingress
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: ingress-local-argocd
+  name: argocd-local
   namespace: argocd
 spec:
   ingressClassName: nginx
