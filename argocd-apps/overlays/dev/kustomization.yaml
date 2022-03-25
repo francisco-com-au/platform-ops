@@ -3,6 +3,22 @@ kind: Kustomization
 resources:
 - ../../base
 
+replacements:
+- source:
+    kind: ConfigMap
+    name: platform-config
+    namespace: bootstrap
+    fieldPath: metadata.name
+  targets:
+  - select:
+      version: argoproj.io/v1alpha1
+      kind: Application
+      name: argo-workflows
+      namespace: argocd
+    fieldPaths:
+    - spec.destination.namespace
+    options:
+      create: true
 configMapGenerator:
 - name: platform-config
   namespace: bootstrap
