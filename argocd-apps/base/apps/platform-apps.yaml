@@ -9,8 +9,8 @@ spec:
   project: platform-apps
   source:
     repoURL: https://github.com/francisco-com-au/platform-apps
-    targetRevision: HEAD
-    path: .
+    targetRevision: $(PLATFORM_APPS_BRANCH)
+    path: overlays/$(PLATFORM_ENV)
     directory:
       recurse: true
   destination:

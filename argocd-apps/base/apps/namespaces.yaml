@@ -9,7 +9,7 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: HEAD
+    targetRevision: $(PLATFORM_APPS_BRANCH)
     path: apps/namespaces
   destination:
     server: https://kubernetes.default.svc

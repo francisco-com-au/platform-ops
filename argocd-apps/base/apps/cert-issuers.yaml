@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-xrd
+  name: cert-issuers
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,13 +9,13 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: HEAD
-    path: crossplane/xrd
+    targetRevision: $(PLATFORM_APPS_BRANCH)
+    path: apps/cert-issuers/overlays/$(PLATFORM_ENV)
     directory:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: crossplane-system
+    namespace: cert-manager
   syncPolicy:
     automated:
       selfHeal: true

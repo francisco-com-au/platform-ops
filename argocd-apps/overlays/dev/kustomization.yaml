@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+configMapGenerator:
+- name: platform-config
+  namespace: bootstrap
+  literals:
+  - PLATFORM_ENV="dev"
+  - PLATFORM_APPS_BRANCH="develop"
+
+vars:
+- name: PLATFORM_ENV
+  objref:
+    kind: ConfigMap
+    name: platform-config
+    namespace: bootstrap
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.PLATFORM_ENV
+- name: PLATFORM_APPS_BRANCH
+  objref:
+    kind: ConfigMap
+    name: platform-config
+    namespace: bootstrap
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.PLATFORM_APPS_BRANCH

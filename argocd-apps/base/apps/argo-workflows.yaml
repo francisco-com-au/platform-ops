@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-issuers
+  name: argo-workflows
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,13 +9,11 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: HEAD
-    path: apps/cert-issuers
-    directory:
-      recurse: true
+    targetRevision: $(PLATFORM_APPS_BRANCH)
+    path: apps/argo-workflows/overlays/$(PLATFORM_ENV)
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: argo
   syncPolicy:
     automated:
       selfHeal: true

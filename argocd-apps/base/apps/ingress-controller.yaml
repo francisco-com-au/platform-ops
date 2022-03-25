@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: ingress-nginx
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: bootstrap
+  project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: HEAD
-    path: apps/argocd
+    targetRevision: $(PLATFORM_APPS_BRANCH)
+    path: apps/ingress-nginx/overlays/$(PLATFORM_ENV)
+    # directory:
+    #   recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: ingress-nginx
   syncPolicy:
     automated:
       selfHeal: true

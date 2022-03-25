@@ -9,8 +9,8 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: HEAD
-    path: crossplane/providers
+    targetRevision: $(PLATFORM_APPS_BRANCH)
+    path: crossplane/providers/overlays/$(PLATFORM_ENV)
     directory:
       recurse: true
   destination:
