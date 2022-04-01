@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: platform-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/francisco-com-au/platform-apps
+      revision: HEAD
+      directories:
+      - path: '*'
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: platform-apps
+      source:
+        repoURL: https://github.com/francisco-com-au/platform-apps
+        targetRevision: HEAD
+        path: '{{path.basename}}/overlays/prod'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: platform-apps
+      syncPolicy:
+        automated:
+          selfHeal: true
+          # prune: false # <- can't enable prunning due to an issue with labels propagations: https://github.com/crossplane/crossplane/issues/2121
+          prune: true # <- I'm not using Crossplane now
+        syncOptions:
+        - CreateNamespace=true
+
+
+
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: platform-apps
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: platform-apps
+#   source:
+#     repoURL: https://github.com/francisco-com-au/platform-apps
+#     targetRevision: HEAD
+#     path: '*/overlays/prod'
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: platform-apps
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: false # <- can't enable prunning due to an issue with labels propagations: https://github.com/crossplane/crossplane/issues/2121
+#     syncOptions:
+#     - CreateNamespace=true

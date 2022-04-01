@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+patchesStrategicMerge:
+- ./argo-workflows.yaml
+- ./argocd.yaml
+- ./cert-issuers.yaml
+- ./cert-manager.yaml
+- ./crossplane-providers.yaml
+- ./crossplane-xrd.yaml
+- ./ingress-controller.yaml
+- ./namespaces.yaml
+- ./platform-apps.yaml
