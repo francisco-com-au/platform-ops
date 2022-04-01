@@ -14,7 +14,7 @@ spec:
       - path: '*'
   template:
     metadata:
-      name: '{{path.basename}}-generated'
+      name: '{{path.basename}}'
     spec:
       project: platform-apps
       source:
@@ -27,7 +27,8 @@ spec:
       syncPolicy:
         automated:
           selfHeal: true
-          prune: false # <- can't enable prunning due to an issue with labels propagations: https://github.com/crossplane/crossplane/issues/2121
+          # prune: false # <- can't enable prunning due to an issue with labels propagations: https://github.com/crossplane/crossplane/issues/2121
+          prune: true # <- I'm not using Crossplane now
         syncOptions:
         - CreateNamespace=true
 
