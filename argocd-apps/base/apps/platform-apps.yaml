@@ -9,10 +9,8 @@ spec:
   project: platform-apps
   source:
     repoURL: https://github.com/francisco-com-au/platform-apps
-    targetRevision: $(PLATFORM_APPS_BRANCH)
-    path: overlays/$(PLATFORM_ENV)
-    directory:
-      recurse: true
+    targetRevision: HEAD
+    path: '*/overlays/prod'
   destination:
     server: https://kubernetes.default.svc
     namespace: platform-apps

@@ -9,8 +9,8 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: $(PLATFORM_APPS_BRANCH)
-    path: apps/argo-workflows/overlays/$(PLATFORM_ENV)
+    targetRevision: HEAD
+    path: apps/argo-workflows/overlays/prod
   destination:
     server: https://kubernetes.default.svc
     namespace: argo

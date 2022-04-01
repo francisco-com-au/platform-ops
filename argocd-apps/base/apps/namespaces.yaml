@@ -9,11 +9,11 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: $(PLATFORM_APPS_BRANCH)
-    path: apps/namespaces
+    targetRevision: HEAD
+    path: apps/namespaces/overlays/prod
   destination:
     server: https://kubernetes.default.svc
-    namespace: argo
+    namespace: platform-ops # <- it doesn't matter really, namespaces are not namespaced
   syncPolicy:
     automated:
       selfHeal: true

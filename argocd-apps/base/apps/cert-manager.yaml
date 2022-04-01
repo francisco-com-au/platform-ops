@@ -9,10 +9,8 @@ spec:
   project: platform-ops
   source:
     repoURL: https://github.com/francisco-com-au/platform-ops
-    targetRevision: $(PLATFORM_APPS_BRANCH)
-    path: apps/cert-manager/overlays/$(PLATFORM_ENV)
-    directory:
-      recurse: true
+    targetRevision: HEAD
+    path: apps/cert-manager/overlays/prod
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
