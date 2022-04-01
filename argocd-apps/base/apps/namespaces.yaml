@@ -13,7 +13,7 @@ spec:
     path: apps/namespaces/overlays/prod
   destination:
     server: https://kubernetes.default.svc
-    namespace: platform-ops # <- it doesn't matter really, namespaces are not namespaced
+    namespace: default # <- it doesn't matter really, namespaces are not namespaced
   syncPolicy:
     automated:
       selfHeal: true
