@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: platform-argocd-apps
+  name: platform-apps
   namespace: argocd
   # finalizers:
   #   - resources-finalizer.argocd.argoproj.io
@@ -20,7 +20,7 @@ spec:
       source:
         repoURL: https://github.com/francisco-com-au/platform-apps.git
         targetRevision: main
-        path: '{{path.basename}}/overlays/prod'
+        path: '{{path}}/overlays/prod'
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd

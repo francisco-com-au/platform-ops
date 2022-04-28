@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: platform-ops-apps
+  name: platform-apps
   namespace: argocd
 spec:
   generators:
@@ -14,4 +14,4 @@ spec:
     spec:
       source:
         targetRevision: develop
-        path: '{{path.basename}}/overlays/dev'
+        path: '{{path}}/overlays/dev'
