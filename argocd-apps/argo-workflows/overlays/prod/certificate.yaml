@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: argo
+  namespace: argo
+spec:
+  dnsNames:
+    - argo.francisco.com.au
+  secretName: argo-tls
+  issuerRef:
+    name: letsencrypt-cluster-issuer
+    kind: ClusterIssuer
