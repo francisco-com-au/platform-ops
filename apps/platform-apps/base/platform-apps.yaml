@@ -11,7 +11,7 @@ spec:
       repoURL: https://github.com/francisco-com-au/platform-apps.git
       revision: main
       directories:
-      - path: 'argocd-apps/*'
+      - path: '*'
   template:
     metadata:
       name: '{{path.basename}}'
