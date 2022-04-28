@@ -1,9 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: cert-issuers
-  namespace: argocd
-spec:
-  source:
-    targetRevision: develop
-    path: apps/cert-issuers/overlays/dev
