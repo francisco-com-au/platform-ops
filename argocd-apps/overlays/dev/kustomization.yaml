@@ -8,8 +8,8 @@ patchesStrategicMerge:
 - ./argocd.yaml
 - ./cert-issuers.yaml
 - ./cert-manager.yaml
-- ./crossplane-providers.yaml
-- ./crossplane-xrd.yaml
+# - ./crossplane-providers.yaml
+# - ./crossplane-xrd.yaml
 - ./ingress-controller.yaml
 - ./namespaces.yaml
-- ./platform-apps.yaml
+# - ./platform-apps.yaml

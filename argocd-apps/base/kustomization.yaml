@@ -5,11 +5,11 @@ resources:
 - apps/argocd.yaml
 - apps/cert-issuers.yaml
 - apps/cert-manager.yaml
-- apps/crossplane-providers.yaml
-- apps/crossplane-xrd.yaml
-- apps/crossplane.yaml
+# - apps/crossplane-providers.yaml
+# - apps/crossplane-xrd.yaml
+# - apps/crossplane.yaml
 - apps/ingress-controller.yaml
 - apps/namespaces.yaml
-- apps/platform-apps.yaml
+# - apps/platform-apps.yaml
 - projects/platform-apps.yaml
 - projects/platform-ops.yaml
