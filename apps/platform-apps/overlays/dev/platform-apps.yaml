@@ -6,12 +6,12 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/francisco-com-au/platform-apps
-      revision: main
+      repoURL: https://github.com/francisco-com-au/platform-apps.git
+      revision: develop
       directories:
       - path: '*'
   template:
     spec:
       source:
-        targetRevision: main
-        path: '{{path.basename}}/overlays/prod'
+        targetRevision: develop
+        path: '{{path}}/overlays/dev'
