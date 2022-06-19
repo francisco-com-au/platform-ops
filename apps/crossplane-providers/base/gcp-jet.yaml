@@ -1,11 +1,11 @@
-# ---
-# apiVersion: pkg.crossplane.io/v1
-# kind: Provider
-# metadata:
-#   name: crossplane-provider-jet-gcp
-# spec:
-#   package: "crossplane/provider-jet-gcp:v0.2.0-preview"
 ---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: crossplane-provider-jet-gcp
+spec:
+  package: "crossplane/provider-jet-gcp:v0.2.0-preview"
+# ---
 # # GCP ProviderConfig with service account secret reference
 # apiVersion: gcp.jet.crossplane.io/v1alpha1
 # kind: ProviderConfig
