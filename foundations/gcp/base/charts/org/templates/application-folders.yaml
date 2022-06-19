@@ -11,5 +11,8 @@ spec:
     parent: folder/{{ $environment.name }}
   providerConfigRef:
     name: default
+  writeConnectionSecretToRef:
+    name: folder-{{ $application.name }}-{{ $environment.name }}-connection-secret
+    namespace: crossplane-system
 {{- end }}
 {{- end }}

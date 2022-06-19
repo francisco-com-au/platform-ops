@@ -11,4 +11,7 @@ spec:
     parent: organizations/{{ $.Values.config.org_id }}
   providerConfigRef:
     name: default
+  writeConnectionSecretToRef:
+    name: folder-{{ $environment.name }}-connection-secret
+    namespace: crossplane-system
 {{- end }}
