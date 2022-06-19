@@ -1,7 +1,0 @@
-{{- range .Values.environments }}
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: folder-{{ .name }}
-{{- end }}

@@ -1,0 +1,19 @@
+{{- range .Values.environments }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: folder-{{ .name }}
+---
+apiVersion: cloudplatform.gcp.jet.crossplane.io/v1alpha1
+kind: Folder
+metadata:
+  name: folder-{{ .name }}
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    displayName: {{ .name }}
+    parent: organizations/{{ .Values.config.org_id}}
+  providerConfigRef:
+    name: default
+{{- end }}
