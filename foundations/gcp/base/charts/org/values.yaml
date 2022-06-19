@@ -1,5 +1,5 @@
 config:
-  org_id: 211712177915
+  org_id: "211712177915"
 environments:
 - name: dev
 - name: test
