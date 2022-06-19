@@ -8,7 +8,7 @@ spec:
   deletionPolicy: Delete
   forProvider:
     displayName: {{ $environment.name }}
-    parent: organizations/{{ $.Values.config.org_id}}
+    parent: organizations/{{ $.Values.config.org_id }}
   providerConfigRef:
     name: default
 {{- end }}

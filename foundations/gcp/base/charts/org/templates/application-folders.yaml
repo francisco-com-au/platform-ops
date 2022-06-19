@@ -1,0 +1,15 @@
+{{- range $application := $.Values.applications }}
+{{- range $environment := $.Values.environments }}
+---
+apiVersion: cloudplatform.gcp.jet.crossplane.io/v1alpha1
+kind: Folder
+metadata:
+  name: {{ $application.name }}-{{ $environment.name }}
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    parent: folder/{{ $environment.name }}
+  providerConfigRef:
+    name: default
+{{- end }}
+{{- end }}
