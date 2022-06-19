@@ -15,5 +15,5 @@ spec:
     displayName: {{ $environment.name }}
     parent: organizations/{{ $.Values.config.org_id}}
   providerConfigRef:
-    name: default
+    name: providerconfig.gcp.jet.crossplane.io/default
 {{- end }}
