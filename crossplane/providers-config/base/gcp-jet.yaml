@@ -1,0 +1,14 @@
+---
+# GCP ProviderConfig with service account secret reference
+apiVersion: gcp.jet.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  projectID: PROJECT_ID
+  credentials:
+    source: Secret
+    secretRef:
+      name: gcp-provider
+      namespace: crossplane-system
+      key: credentials.json
