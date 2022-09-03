@@ -1,0 +1,10 @@
+config:
+  org_id: "211712177915"
+environments:
+- name: dev
+- name: test
+- name: prod
+applications:
+- name: kaka
+  envs:
+  - dev
