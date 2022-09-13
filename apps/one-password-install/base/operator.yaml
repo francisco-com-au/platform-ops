@@ -29,7 +29,7 @@ spec:
             - name: OP_CONNECT_HOST
               value: "http://onepassword-connect:8080"
             - name: POLLING_INTERVAL
-              value: "600"
+              value: "10"
             - name: OP_CONNECT_TOKEN
               valueFrom:
                 secretKeyRef:
